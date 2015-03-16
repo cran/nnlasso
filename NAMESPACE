@@ -1,0 +1,4 @@
+export(nnlasso,nnlasso.normal,nnlasso.binomial,nnlasso.poisson,nnlasso.normal.lambda,nnlasso.binomial.lambda,nnlasso.poisson.lambda,plot.nnlasso,predict.nnlasso,coef.nnlasso,cv.nnlasso,cv.nnlasso.normal,cv.nnlasso.binomial,cv.nnlasso.poisson,kfold,fold,msefun.normal,msefun.binomial,msefun.poisson,bars)
+S3method(plot,nnlasso)
+S3method(predict,nnlasso)
+S3method(coef,nnlasso)	
