@@ -21,7 +21,6 @@ k=5,nlambda=50,tau=1,plot=TRUE, errorbars=TRUE)}
 	\item{se}{A vector containing standard errors of cross validation errors}
 }
 \note{This function uses prediction means squared errors for normal family and deviance for binomial and poisson family.}
-\references{Mandal, B.N. and Jun Ma, (2015). L1 regularization path algorithm for generalized linear models with non-negativity constraints.}
 \author{B N Mandal and Jun Ma}
 \examples{
 #normal family

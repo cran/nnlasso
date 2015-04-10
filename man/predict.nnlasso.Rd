@@ -10,10 +10,7 @@
   \item{...}{Not used. Other arguments to predict.}
  }
 \value{A vector of estimated coefficients of length p or p+1 at the given value of lambda or L1 norm or fraction of norm, depending on intercept=TRUE or FALSE in `nnlasso' object. Here p is number of predictor variables.}
-
-\references{Mandal, B.N. and Jun Ma, (2015). L1 regularization path algorithm for generalized linear models with non-negativity constraints.}
 \author{B N Mandal and Jun Ma}
-
 \examples{
 data(car)
 attach(car)

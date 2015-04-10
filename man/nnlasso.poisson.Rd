@@ -30,7 +30,5 @@
 	\item{normx}{Norm of x variables}
 	\item{se}{The standard errors of coefficient estimates}
 }
-
-\references{Mandal, B.N. and Jun Ma, (2015). L1 regularization path algorithm for generalized linear models with non-negativity constraints.}
 \author{B N Mandal and Jun Ma}
 \keyword{internal}

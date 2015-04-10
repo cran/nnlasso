@@ -9,7 +9,6 @@
   }
 \value{Estimated coefficients for different lambdas starting from maximum value of lambda to minimum value of lambda}
 
-\references{Mandal, B.N. and Jun Ma, (2015). L1 regularization path algorithm for generalized linear models with non-negativity constraints.}
 \author{B N Mandal and Jun Ma}
 
 \examples{
