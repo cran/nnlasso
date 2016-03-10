@@ -10,7 +10,7 @@
 	\item{sumy}{Sum of y values}
 	\item{beta0.old}{Initial value of intercept}
 	\item{beta1.old}{A vector of initial values of slope coefficients}
-	\item{x}{A n by p1 matrix of predictors}
+	\item{x}{A n by p matrix of predictors}
 	\item{y}{A vector of n observations}
 	\item{dxkx0}{In case of a model with intercept, first diagonal of X'X}
 	\item{tau}{Elastic net paramter. Default is 1}
@@ -32,6 +32,6 @@
 	\item{mu1}{Value of mu at solution}
 	\item{vcov}{Variance-covariance matrix of the coefficient estimates}
 }
-\author{B N Mandal and Jun Ma}
+\author{Baidya Nath Mandal and Jun Ma}
 \details{This function is internal and used by nnlasso.binomial function. User need not call this function.}
 \keyword{internal}

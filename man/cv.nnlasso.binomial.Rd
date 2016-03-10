@@ -8,7 +8,7 @@
   \item{y}{y is a vector of response variable of order n x 1.}
   \item{k}{Number of folds for cross validation. Default is k=5.}
   \item{nlambda}{Number of lambda values to be used for cross validation. Default is nlambda=50.}
-  \item{tau}{Elastic net parameter, \eqn{0 \le \tau \le 1} in elastic net penalty \eqn{\lambda\{\tau\|\beta\|_1+(1-\tau)\|beta\|_2^2\}}. Default tau=1 corresponds to LASSO penalty.}
+  \item{tau}{Elastic net parameter, \eqn{0 \le \tau \le 1} in elastic net penalty \eqn{\lambda{\tau|\beta|_1+(1-\tau)|\beta|_2^2}}. Default tau=1 corresponds to LASSO penalty.}
   \item{plot}{if TRUE, produces a plot of cross validated prediction mean squared errors against lambda. Default is TRUE.}
   \item{errorbars}{If TRUE, error bars are drawn in the plot. Default is TRUE.}
  }
@@ -19,5 +19,6 @@
 	\item{se}{A vector containing standard errors of cross validation errors}
 }
 \note{This function need not be called by user. The function is internally called by cv.nnlasso function.}
-\author{B N Mandal and Jun Ma}
+\references{Mandal, B.N. and  Ma, J.(2016).L1 regularized multiplicative iterative path algorithm for non-negative generalized linear models}
+\author{Baidya Nath Mandal and Jun Ma}
 \keyword{internal}

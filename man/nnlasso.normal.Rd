@@ -30,5 +30,6 @@
 	\item{normx}{Norm of x variables}
 	\item{se}{The standard errors of coefficient estimates}
 }
-\author{B N Mandal and Jun Ma}
+\references{Mandal, B.N. and Ma, J. (2016). L1 regularized multiplicative iterative path algorithm for non-negative generalized linear models.}
+\author{Baidya Nath Mandal and Jun Ma}
 \keyword{internal}

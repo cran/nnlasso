@@ -32,6 +32,6 @@ x,y,dxkx0,tau,lambda1,tol,maxiter,xbeta.old,mu1,eps,SE)}
 	\item{mu1}{Value of mu at solution}
 	\item{vcov}{Variance-covariance matrix of the coefficient estimates}
 }
-\author{B N Mandal and Jun Ma}
+\author{Baidya Nath Mandal and Jun Ma}
 \details{This function is internal and used by nnlasso.poisson function. User need not call this function.}
 \keyword{internal}

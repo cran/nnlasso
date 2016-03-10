@@ -10,6 +10,6 @@
   \item{yi}{Hold out data of response variables}
  }
 \value{A value of prediction mean squared error}
-\author{B N Mandal and Jun Ma}
+\author{Baidya Nath Mandal and Jun Ma}
 \details{This function is internal and used by cross validation routines.}
 \keyword{internal}

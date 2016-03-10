@@ -8,7 +8,7 @@
   \item{k}{Number of folds}
  }
 \value{A matrix with fold identification in first column.}
-\author{B N Mandal and Jun Ma}
+\author{Baidya Nath Mandal and Jun Ma}
 \details{This function is internal and used by cross validation routines.}
 \examples{
 data=matrix(rnorm(10*4),10,4)

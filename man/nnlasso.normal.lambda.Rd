@@ -28,6 +28,6 @@ lambda1,tol,maxiter,xbeta.old,eps,SE)}
 	\item{xbeta.new}{xbeta values at solution}
 	\item{vcov}{Variance-covariance matrix of the coefficient estimates}
       }
-\author{B N Mandal and Jun Ma}
+\author{Baidya Nath Mandal and Jun Ma}
 \details{This function is internal and used by nnlasso.normal function. User need not call this function.}
 \keyword{internal}

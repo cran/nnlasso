@@ -9,7 +9,8 @@
   }
 \value{Estimated coefficients for different lambdas starting from maximum value of lambda to minimum value of lambda}
 
-\author{B N Mandal and Jun Ma}
+\references{Mandal, B.N. and Ma, J. (2016). L1 regularized multiplicative iterative path algorithm for non-negative generalized linear models}
+\author{Baidya Nath Mandal and Jun Ma}
 
 \examples{
 data(car)

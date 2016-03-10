@@ -1,3 +1,4 @@
+#Lambdas are taken on log scale
 nnlasso<-function(x,y,family=c("normal","binomial","poisson"),lambda=NULL,intercept=TRUE,normalize=TRUE,tau=1,tol=1e-6,maxiter=1e5,nstep=100,min.lambda=1e-4,eps=1e-6,path=TRUE,SE=FALSE)
 {
 	if(missing(family)) family="normal"
@@ -29,8 +30,8 @@ nnlasso.normal<-function(x,y,lambda=NULL,intercept=TRUE,normalize=TRUE,tau=1,tol
 	max.lambda=max(abs(xpy))
 	if (path)
 	{
-		stepsize=exp((log(min.lambda)-log(max.lambda))/nstep)
-		lambdas=max.lambda*stepsize^((1:nstep)-1)
+		stepsize=(log(min.lambda)-log(max.lambda))/(nstep-1)
+		lambdas=exp(log(max.lambda)+stepsize*c(0:(nstep-1)))
 	} else {
 			nstep=2
 			lambdas=c(max.lambda,lambda)
@@ -80,7 +81,7 @@ nnlasso.normal<-function(x,y,lambda=NULL,intercept=TRUE,normalize=TRUE,tau=1,tol
 	if(SE)
 	{
 		vcov=res$vcov
-		vcov=vcov/normx
+		vcov=vcov/normx	
 		vcov=t(vcov)/normx
 		se=sqrt(diag(vcov))
 		if(intercept) 
@@ -122,8 +123,8 @@ nnlasso.binomial<-function(x,y,lambda=NULL,intercept=TRUE,normalize=TRUE,tau=1,t
 	max.lambda=max(abs(g1))
 	if (path)
 	{
-		stepsize=exp((log(min.lambda)-log(max.lambda))/nstep)
-		lambdas=max.lambda*stepsize^((1:nstep)-1)
+		stepsize=(log(min.lambda)-log(max.lambda))/(nstep-1)
+		lambdas=exp(log(max.lambda)+stepsize*c(0:(nstep-1)))
 	} else {
 			nstep=2
 			lambdas=c(max.lambda,lambda)
@@ -169,14 +170,14 @@ nnlasso.binomial<-function(x,y,lambda=NULL,intercept=TRUE,normalize=TRUE,tau=1,t
 		if(intercept)
 		{
 			vcov=res$vcov[2:(p+1),2:(p+1)]
-			vcov=vcov/normx	#rows are divided by normx, i.e., row1 by normx1, row2 by normx2 and so on
+			vcov=vcov/normx	
 			vcov=t(vcov)/normx
 			se=sqrt(diag(vcov))
 			se0=sqrt(res$vcov[1,1]-t(meanx)%*%vcov%*%meanx)
 			se=c(se0,se)
 		} else {
 				vcov=res$vcov
-				vcov=vcov/normx	#rows are divided by normx, i.e., row1 by normx1, row2 by normx2 and so on
+				vcov=vcov/normx	
 				vcov=t(vcov)/normx
 				se=sqrt(diag(vcov))
 			}		
@@ -215,8 +216,8 @@ nnlasso.poisson<-function(x,y,lambda=NULL,intercept=TRUE,normalize=TRUE,tau=1,to
 	max.lambda=max(abs(g1))
 	if (path)
 	{
-		stepsize=exp((log(min.lambda)-log(max.lambda))/nstep)
-		lambdas=max.lambda*stepsize^((1:nstep)-1)
+		stepsize=(log(min.lambda)-log(max.lambda))/(nstep-1)
+		lambdas=exp(log(max.lambda)+stepsize*c(0:(nstep-1)))
 	} else {
 			nstep=2
 			lambdas=c(max.lambda,lambda)
@@ -261,14 +262,14 @@ nnlasso.poisson<-function(x,y,lambda=NULL,intercept=TRUE,normalize=TRUE,tau=1,to
 		if(intercept)
 		{
 			vcov=res$vcov[2:(p+1),2:(p+1)]
-			vcov=vcov/normx
+			vcov=vcov/normx	
 			vcov=t(vcov)/normx
 			se=sqrt(diag(vcov))
 			se0=sqrt(res$vcov[1,1]-t(meanx)%*%vcov%*%meanx)
 			se=c(se0,se)
 		} else {
 				vcov=res$vcov
-				vcov=vcov/normx
+				vcov=vcov/normx	
 				vcov=t(vcov)/normx
 				se=sqrt(diag(vcov))
 			}		
@@ -393,7 +394,7 @@ nnlasso.binomial.lambda<-function(n,p,sumy,beta0.old,beta1.old,x,y,dxkx0,tau,lam
 	{
 		if (dxkx0!=Inf) 
 		{
-			x=cbind(rep(1,n),x) 
+			x=cbind(rep(1,n),x)  
 			p=p+1
 			grad=t(x)%*%(y-mu1)-lambda1*tau-2*lambda1*(1-tau)*c(0,beta1.new)
 		} else grad=t(x)%*%(y-mu1)-lambda1*tau-2*lambda1*(1-tau)*beta1.new		
@@ -467,7 +468,7 @@ nnlasso.poisson.lambda<-function(n,p,sumy,beta0.old,beta1.old,x,y,dxkx0,tau,lamb
 	{
 		if (dxkx0!=Inf) 
 		{
-			x=cbind(rep(1,n),x)
+			x=cbind(rep(1,n),x)  
 			p=p+1
 			grad=t(x)%*%(y-mu1)-lambda1*tau-2*lambda1*(1-tau)*c(0,beta1.new)
 		} else grad=t(x)%*%(y-mu1)-lambda1*tau-2*lambda1*(1-tau)*beta1.new
@@ -558,6 +559,7 @@ kfold<-function(data1,k)
 	n=nrow(data1)
 	p=ncol(data1)
 	data1=cbind(rep(0,n),data1)
+	#length of the folds
 	l=floor(n/k)
 	r=n%%k
 	S=1:n
@@ -639,9 +641,9 @@ cv.nnlasso.normal<-function(x,y,k=5,nlambda=50,tau=1,plot=TRUE,errorbars=TRUE)
         sx = scale(sx, FALSE, normx)
     	mse=matrix(0,nlambda,k)
 	max.lambda=max(abs(t(sx)%*%sy))
-	rm(sx,sy)
-	gap=exp((log(1e-4)-log(max.lambda))/nlambda)
-	lambdas=max.lambda*gap^((1:nlambda)-1)
+	rm(sx,sy)	
+	gap=(log(1e-4)-log(max.lambda))/(nlambda-1)
+	lambdas=exp(log(max.lambda)+gap*c(0:(nlambda-1)))
 	x=kfold(x,k)
 	folds.ident=x[,1]
 	x=x[,2:ncol(x)]	
@@ -676,9 +678,9 @@ cv.nnlasso.binomial<-function(x,y,k=5,nlambda=50,tau=1,plot=TRUE,errorbars=TRUE)
     	normx = sqrt(drop(one %*% (sx^2)))           
         sx = scale(sx, FALSE, normx)
     	max.lambda=max(abs(t(sx)%*%(y-0.5)))
-	if (nrow(x)>ncol(x)) min.lambda=1e-4*max.lambda else min.lambda=1e-2*max.lambda
-	gap=exp((log(min.lambda)-log(max.lambda))/nlambda)
-	lambdas=max.lambda*gap^((1:nlambda)-1)
+	if (nrow(x)>ncol(x)) min.lambda=1e-4*max.lambda else min.lambda=1e-2*max.lambda	
+	gap=(log(min.lambda)-log(max.lambda))/(nlambda-1)
+	lambdas=exp(log(max.lambda)+gap*c(0:(nlambda-1)))
 	mse=matrix(0,nlambda,k)
 	x=kfold(x,k)
 	folds.ident=x[,1]
@@ -714,9 +716,9 @@ cv.nnlasso.poisson<-function(x,y,k=5,nlambda=50,tau=1,plot=TRUE,errorbars=TRUE)
     	normx = sqrt(drop(one %*% (sx^2)))           
         sx = scale(sx, FALSE, normx)
     	max.lambda=max(abs(t(sx)%*%(y-1)))
-	if (nrow(x)>ncol(x)) min.lambda=1e-4*max.lambda else min.lambda=1e-2*max.lambda
-	gap=exp((log(min.lambda)-log(max.lambda))/nlambda)
-	lambdas=max.lambda*gap^((1:nlambda)-1)
+	if (nrow(x)>ncol(x)) min.lambda=1e-4*max.lambda else min.lambda=1e-2*max.lambda	
+	gap=(log(min.lambda)-log(max.lambda))/(nlambda-1)
+	lambdas=exp(log(max.lambda)+gap*c(0:(nlambda-1)))
 	mse=matrix(0,nlambda,k)
 	x=kfold(x,k)
 	folds.ident=x[,1]
@@ -742,6 +744,4 @@ cv.nnlasso.poisson<-function(x,y,k=5,nlambda=50,tau=1,plot=TRUE,errorbars=TRUE)
 		abline(v=lambda)
 	}
 	return(out)
-}
-########################################################################################################################################################################
-	
+}	

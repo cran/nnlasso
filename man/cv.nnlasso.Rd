@@ -10,7 +10,7 @@ k=5,nlambda=50,tau=1,plot=TRUE, errorbars=TRUE)}
   \item{family}{family is either "normal" or "binomial" or "poisson".}
   \item{k}{Number of folds for cross validation. Default is k=5.}
   \item{nlambda}{Number of lambda values to be used for cross validation. Default is nlambda=50.}
-  \item{tau}{Elastic net parameter, \eqn{0 \le \tau \le 1} in elastic net penalty \eqn{\lambda\{\tau\|\beta\|_1+(1-\tau)\|beta\|_2^2\}}. Default tau=1 corresponds to LASSO penalty.}
+  \item{tau}{Elastic net parameter, \eqn{0 \le \tau \le 1} in elastic net penalty \eqn{\lambda{\tau|\beta|_1+(1-\tau)|\beta|_2^2}}. Default tau=1 corresponds to LASSO penalty.}
   \item{plot}{if TRUE, produces a plot of cross validated prediction mean squared errors/ deviances against lambda. Default is TRUE.}
   \item{errorbars}{If TRUE, error bars are drawn in the plot. Default is TRUE.}
  }
@@ -21,21 +21,21 @@ k=5,nlambda=50,tau=1,plot=TRUE, errorbars=TRUE)}
 	\item{se}{A vector containing standard errors of cross validation errors}
 }
 \note{This function uses prediction means squared errors for normal family and deviance for binomial and poisson family.}
-\author{B N Mandal and Jun Ma}
+\references{Mandal, B.N. and Ma, J. (2016). L1 regularized multiplicative iterative path algorithm for non-negative generalized linear models.}
+\author{Baidya Nath Mandal and Jun Ma}
 \examples{
 #normal family
 data(car)
 attach(car)
 x=as.matrix(car[,1:10])
-cv.nnlasso(x,y,family="normal",k=5)
-
+\dontrun{cv.nnlasso(x,y,family="normal",k=5)}
 #binomial family with same data
-cv.nnlasso(x,y1,family="binomial",k=5)
+\dontrun{cv.nnlasso(x,y1,family="binomial",k=5)}
 detach(car)
 
 #poisson family
 x=matrix(rnorm(100*30),100,30)
 y=sample(c(1:5),100,replace=TRUE)
-cv.nnlasso(x,y,family="poisson",k=5)
+\dontrun{cv.nnlasso(x,y,family="poisson",k=5)}
 }
 \keyword{Crossvalidation}

@@ -30,5 +30,7 @@ maxiter=1e5,nstep=100,min.lambda=1e-4,eps=1e-6,path=TRUE,SE=FALSE)}
 	\item{normx}{Norm of x variables}
 	\item{se}{The standard errors of coefficient estimates}
 }
-\author{B N Mandal and Jun Ma}
+
+\references{Mandal, B.N. and Ma, J. (2016). L1 regularized multiplicative iterative path algorithm for non-negative generalized linear models.}
+\author{Baidya Nath Mandal and Jun Ma}
 \keyword{internal}

@@ -32,7 +32,9 @@ eps=1e-6,path=TRUE,SE=FALSE)}
 	\item{normx}{Norm of x variables}
 	\item{se}{The standard errors of coefficient estimates}
 }
-\author{B N Mandal and Jun Ma}
+
+\references{Mandal, B.N. and Ma, J. (2016). L1 regularized multiplicative iterative path algorithm for non-negative generalized linear models.}
+\author{Baidya Nath Mandal and Jun Ma}
 \examples{
 #Non-negative LASSO
 data(car)
@@ -42,36 +44,48 @@ g1=nnlasso(x,y,family="normal")
 plot(g1)
 plot(g1,xvar="lambda")
 
+
 #Non-negative Elastic net with same data
+\dontrun{
 g2=nnlasso(x,y,family="normal",tau=0.6)
 plot(g2)
 plot(g2,xvar="lambda")
+}
 
 #Non-negative Ridge regression with same data
+\dontrun{
 g3=nnlasso(x,y,family="normal",tau=0)
 plot(g3)
 plot(g3,xvar="lambda")
+}
 
 #Non-negative L1 penalized GLM for binomial family
+\dontrun{
 g1=nnlasso(x,y1,family="binomial")
 plot(g1)
 plot(g1,xvar="lambda")
+}
 
 #Non-negative Elastic net with GLM with binomial family
+\dontrun{
 g2=nnlasso(x,y1,family="binomial",tau=0.8)
 plot(g2)
 plot(g2,xvar="lambda")
+}
 
 #coefficient estimates for a particular lambda for normal family
 g1=nnlasso(x,y,lambda=0.01,family="normal",path=FALSE,SE=TRUE)
 coef(g1)
 round(g1$se,3)
 
+
 #coefficient estimates for a particular lambda for binomial family
+\dontrun{
 g2=nnlasso(x,y1,lambda=0.01,family="binomial",path=FALSE,SE=TRUE)
 coef(g2)
 round(g2$se,3)
 detach(car)
+}
 }
 \keyword{LASSO}
 \keyword{L1 penalty}

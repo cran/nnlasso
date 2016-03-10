@@ -9,7 +9,10 @@
   \item{...}{Optional graphical parameters to matplot() function}
  }
 \value{A plot of regularization path is produced.}
-\author{B N Mandal and Jun Ma}
+
+
+\references{Mandal, B.N. and Ma, J. (2016). L1 regularized multiplicative iterative path algorithm for non-negative generalized linear models.}
+\author{Baidya Nath Mandal and Jun Ma}
 
 \examples{
 data(car)

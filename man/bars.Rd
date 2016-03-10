@@ -9,6 +9,6 @@
   \item{low}{a vector}
   \item{width}{a vector}
  }
-\author{B N Mandal and Jun Ma}
+\author{Baidya Nath Mandal and Jun Ma}
 \details{This function is internal and used by cross validation routines.}
 \keyword{internal}
